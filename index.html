@@ -207,14 +207,14 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; background: var(--navy-950); color: var(--ink); overflow-x: hidden; }
+    html { font-size: 16px; background: var(--navy-950); color: var(--ink); overflow-x: hidden; overflow-x: clip; }
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--canvas);
       color: var(--ink);
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
+      overflow-x: hidden; overflow-x: clip;
     }
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; height: auto; }
@@ -437,7 +437,7 @@
     }
     .sticky-visual-col { position: relative; }
     .sticky-frame {
-      position: sticky; top: 112px; width: 100%; aspect-ratio: 4 / 3; border-radius: var(--radius-xl);
+      position: sticky; top: max(96px, calc(50vh - 260px)); width: 100%; aspect-ratio: 4 / 3; border-radius: var(--radius-xl);
       overflow: hidden; background: var(--navy-900);
       box-shadow: 0 35px 80px -22px rgba(15, 27, 51, 0.35);
       border: 1px solid rgba(24, 39, 73, 0.12);
@@ -458,8 +458,9 @@
     .sticky-frame-overlay strong { font-size: 1rem; display: block; }
     .sticky-frame-overlay span { font-size: 0.88rem; color: rgba(226, 234, 248, 0.8); }
     .sticky-step-num {
-      font-size: 0.85rem; font-weight: 800; color: var(--amber);
-      padding: 6px 12px; border-radius: 999px; background: rgba(253, 133, 5, 0.16);
+      position: absolute; top: 18px; left: 18px; z-index: 3;
+      font-size: 0.85rem; font-weight: 800; color: #fff;
+      padding: 6px 12px; border-radius: 999px; background: rgba(11, 20, 38, 0.6); backdrop-filter: blur(10px);
       white-space: nowrap;
     }
 
@@ -916,13 +917,7 @@
               <img data-step="1" width="1400" height="1050" loading="lazy" decoding="async" src="assets/images/apex-interior.webp" alt="Interior moderno de apartamento de lujo en Santo Domingo" />
               <img data-step="2" width="1080" height="607" loading="lazy" decoding="async" src="assets/images/torre-lista-piscina.webp" alt="Piscina y área social de una torre residencial terminada" />
               <img data-step="3" width="1400" height="1050" loading="lazy" decoding="async" src="assets/images/apex-rooftop.webp" alt="Área social y terraza panorámica en torre del Polígono Central" />
-              <div class="sticky-frame-overlay">
-                <div>
-                  <strong id="stickyCaptionTitle" aria-live="polite">01 · Selección Estratégica por Plusvalía</strong>
-                  <span id="stickyCaptionSub">Polígono Central SD (La Esperilla, Piantini, Naco) y Punta Cana.</span>
-                </div>
-                <span class="sticky-step-num" id="stickyStepBadge">01 / 04</span>
-              </div>
+              <span class="sticky-step-num" id="stickyStepBadge" aria-hidden="true">01 / 04</span>
             </div>
           </div>
 
@@ -1425,9 +1420,7 @@
             storyCards.forEach((c, i) => c.classList.toggle('is-active', i === idx));
             stickyImgs.forEach((im, i) => im.classList.toggle('is-active', i === idx));
             const activeCard = storyCards[idx];
-            if (activeCard && capTitle && capSub && stepBadge) {
-              capTitle.textContent = activeCard.dataset.title;
-              capSub.textContent = activeCard.dataset.sub;
+            if (stepBadge) {
               stepBadge.textContent = `0${idx + 1} / 04`;
             }
           };
