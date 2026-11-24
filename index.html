@@ -511,24 +511,34 @@
       background: var(--amber); border-color: var(--amber); color: var(--white);
     }
 
-    .bento-projects {
-      display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px;
-    }
+    /* Galería horizontal: tarjetas verticales que se desplazan de lado al hacer scroll */
+    .hs-viewport { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin: 0 -8px; padding: 8px; }
+    .hs-viewport::-webkit-scrollbar { display: none; }
+    .portfolio-section.hs-on { padding: 60px 0 32px; }
+    .portfolio-section.hs-on .section-head-row { margin-bottom: 32px; }
+    .portfolio-section.hs-on .hs-viewport { overflow: visible; scroll-snap-type: none; }
+    .bento-projects { display: flex; gap: 24px; width: max-content; }
     .project-card {
-      position: relative; border-radius: var(--radius-xl); overflow: hidden;
-      background: var(--navy-900); border: 1px solid var(--line-dark);
+      position: relative; border-radius: var(--radius-xl); overflow: hidden; flex: 0 0 auto;
+      height: clamp(400px, calc(100svh - 345px), 580px); aspect-ratio: 3 / 2;
+      background: var(--navy-900); border: 1px solid var(--line-dark); scroll-snap-align: start;
       display: flex; flex-direction: column; justify-content: flex-end;
-      min-height: 460px; transition: transform 0.45s var(--ease-apple), box-shadow 0.45s var(--ease-apple);
+      transition: transform 0.45s var(--ease-apple), box-shadow 0.45s var(--ease-apple);
     }
-    .project-card.span-7 { grid-column: span 7; }
-    .project-card.span-5 { grid-column: span 5; }
-    .project-card.span-6 { grid-column: span 6; min-height: 420px; }
     .project-card.is-hidden { display: none; }
     .project-card img {
-      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-      transition: transform 0.9s var(--ease-apple);
+      position: absolute; top: 0; bottom: 0; left: -6%; width: 112%; height: 100%; object-fit: cover;
     }
-    .project-card:hover img { transform: scale(1.07); }
+    .hs-progress { margin-top: 28px; height: 2px; border-radius: 2px; background: rgba(255, 255, 255, 0.12); overflow: hidden; }
+    .project-card.hs-end { background: radial-gradient(120% 90% at 0% 100%, rgba(253, 133, 5, 0.28), transparent 60%), var(--navy-900); border-color: rgba(253, 133, 5, 0.35); aspect-ratio: 4 / 5; }
+    .project-card.hs-end h3 { font-size: clamp(1.8rem, 2.6vw, 2.4rem); line-height: 1.1; }
+    .hs-end .project-cta { margin-top: 6px; padding: 14px 22px; border-radius: 999px; background: var(--amber); color: #0b1426; }
+    .hs-end .project-cta:hover { color: #0b1426; background: #ffb35c; }
+    @media (max-width: 860px) {
+      .project-card, .project-card.hs-end { height: 500px; width: min(84vw, 380px); aspect-ratio: auto; }
+    }
+    .hs-progress i { display: block; height: 100%; background: var(--amber); transform-origin: 0 50%; transform: scaleX(0); }
+    .portfolio-section:not(.hs-on) .hs-progress { display: none; }
     .project-card:hover {
       transform: translateY(-6px);
       box-shadow: 0 36px 80px -20px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(253, 133, 5, 0.45);
@@ -694,7 +704,6 @@
     @media (max-width: 1024px) {
       .hero-grid, .sticky-grid, .sim-shell, .faq-layout { grid-template-columns: 1fr; }
       .sticky-visual-col { position: relative; top: 0; }
-      .project-card.span-7, .project-card.span-5, .project-card.span-6 { grid-column: span 12; min-height: 380px; }
       .sim-controls { border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 30px; }
       .sim-results { padding: 30px; }
       .venture-grid { grid-template-columns: 1fr; }
@@ -962,9 +971,10 @@
           </div>
         </div>
 
+        <div class="hs-viewport" tabindex="0" aria-label="Proyectos, desliza para ver más">
         <div class="bento-projects">
-          <article class="project-card span-7 reveal-up" data-category="sd">
-            <img src="assets/images/apex-esperilla.webp" width="1400" height="1400" alt="Torre APEX La Esperilla en Santo Domingo" loading="lazy" decoding="async" />
+          <article class="project-card reveal-up" data-category="sd">
+            <img src="assets/images/apex-esperilla.webp" width="1400" height="1400" style="object-position:50% 8%" alt="Torre APEX La Esperilla en Santo Domingo" loading="lazy" decoding="async" />
             <div class="project-scrim"></div>
             <div class="project-content">
               <span class="project-tag">La Esperilla · Santo Domingo</span>
@@ -974,7 +984,7 @@
             </div>
           </article>
 
-          <article class="project-card span-5 reveal-up" data-category="sd">
+          <article class="project-card reveal-up" data-category="sd">
             <img src="assets/images/apex-rooftop.webp" width="1400" height="1050" alt="Rooftop y áreas sociales panorámicas en el Polígono Central" loading="lazy" decoding="async" />
             <div class="project-scrim"></div>
             <div class="project-content">
@@ -985,7 +995,7 @@
             </div>
           </article>
 
-          <article class="project-card span-6 reveal-up" data-category="inversion">
+          <article class="project-card reveal-up" data-category="inversion">
             <img src="assets/images/torre-lista-atardecer.webp" width="1097" height="960" alt="Torre residencial terminada con piscina y terraza social al atardecer" loading="lazy" decoding="async" />
             <div class="project-scrim"></div>
             <div class="project-content">
@@ -996,7 +1006,7 @@
             </div>
           </article>
 
-          <article class="project-card span-6 reveal-up" data-category="inversion">
+          <article class="project-card reveal-up" data-category="inversion">
             <img src="assets/images/apex-gym.webp" width="1400" height="1050" alt="Amenidades modernas y proyectos turísticos con Ley CONFOTUR en Punta Cana" loading="lazy" decoding="async" />
             <div class="project-scrim"></div>
             <div class="project-content">
@@ -1006,7 +1016,18 @@
               <a class="project-cta" href="https://wa.me/18294554783?text=Hola%20Howard%2C%20quiero%20ver%20proyectos%20con%20Ley%20CONFOTUR%20en%20Punta%20Cana%20o%20Vista%20Cana." target="_blank" rel="noopener noreferrer" data-track="whatsapp">Explorar Proyectos CONFOTUR ↗</a>
             </div>
           </article>
+
+          <article class="project-card hs-end" data-category="always">
+            <div class="project-content">
+              <span class="project-tag">Todo el país</span>
+              <h3>¿No ves lo que buscas?</h3>
+              <p>Cuéntame tu presupuesto y la zona que te interesa. Te consigo opciones listas o en planos en cualquier parte de República Dominicana.</p>
+              <a class="project-cta" href="https://wa.me/18294554783?text=Hola%20Howard%2C%20no%20encontr%C3%A9%20lo%20que%20busco%20en%20tu%20web.%20%C2%BFMe%20ayudas%3F" target="_blank" rel="noopener noreferrer" data-track="whatsapp">Escríbeme por WhatsApp ↗</a>
+            </div>
+          </article>
         </div>
+        </div>
+        <div class="hs-progress" aria-hidden="true"><i></i></div>
       </div>
     </section>
 
@@ -1483,7 +1504,7 @@
           btn.classList.add('is-active'); btn.setAttribute('aria-pressed', 'true');
           const cat = btn.dataset.filter;
           projectCards.forEach(card => {
-            const show = cat === 'all' || card.dataset.category === cat;
+            const show = cat === 'all' || card.dataset.category === cat || card.dataset.category === 'always';
             card.classList.toggle('is-hidden', !show);
           });
           if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
@@ -1549,6 +1570,7 @@
   </script>
   <script defer src="assets/orbit.js"></script>
   <script defer src="assets/menu.js"></script>
+  <script defer src="assets/hscroll.js"></script>
   <script defer src="assets/analytics.js"></script>
 </body>
 </html>
