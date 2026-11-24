@@ -45,6 +45,7 @@
   <!-- Motion Engine: Lenis Smooth Scroll + GSAP 3.12 + ScrollTrigger -->
   <link rel="preload" as="image" href="assets/images/howard-cutout.webp" type="image/webp" fetchpriority="high" />
   <link rel="stylesheet" href="assets/orbit.css" />
+  <link rel="stylesheet" href="assets/menu.css" />
   <link rel="stylesheet" href="assets/vendor/lenis.css" />
   <script defer src="assets/vendor/lenis.min.js"></script>
   <script defer src="assets/vendor/gsap.min.js"></script>
@@ -740,29 +741,32 @@
   <div class="scroll-progress" id="scrollProgress"></div>
   <div class="film-grain" aria-hidden="true"></div>
 
-  <!-- FLOATING DYNAMIC ISLAND NAVBAR -->
-  <div class="nav-shell" id="navShell">
-    <header class="nav-pill">
-      <a class="brand-lockup" href="#inicio">
-        <img src="assets/images/alveare-logo.webp" alt="Logo Alveare Realty" width="32" height="32" />
-        <span class="brand-text">
-          <span class="brand-name">Howard Luna</span>
-          <span class="brand-sub">Alveare Realty · RD</span>
-        </span>
-      </a>
-      <nav class="nav-links" aria-label="Navegación principal">
-        <a href="#metodo">Método</a>
-        <a href="#proyectos">Proyectos</a>
-        <a href="#simulador">Simulador</a>
-        <a href="#faq">FAQ</a>
-        <a href="guia-comprar-apartamento-santo-domingo-confotur/">Guía</a>
-        <a href="#servicios">Servicios</a>
-        <a href="#contacto">Contacto</a>
+  <!-- MENÚ: botón flotante + pantalla completa -->
+  <button class="hm-btn" id="hmBtn" type="button" aria-expanded="false" aria-controls="hmMenu" aria-label="Abrir menú">
+    <span class="hm-lines" aria-hidden="true"><i></i><i></i></span>
+  </button>
+  <div class="hm-menu" id="hmMenu" role="dialog" aria-modal="true" aria-label="Menú" hidden>
+    <div class="hm-inner">
+      <nav class="hm-nav" aria-label="Navegación principal">
+        <a href="#metodo"><small>01</small><span>Método</span><em>Cómo elegimos un proyecto</em></a>
+        <a href="#proyectos"><small>02</small><span>Proyectos</span><em>Santo Domingo, Punta Cana, Jarabacoa</em></a>
+        <a href="#simulador"><small>03</small><span>Simulador</span><em>Cuánto ahorras con CONFOTUR</em></a>
+        <a href="#faq"><small>04</small><span>Preguntas</span><em>Lo que todos preguntan antes de comprar</em></a>
+        <a href="guia-comprar-apartamento-santo-domingo-confotur/"><small>05</small><span>Guía 2026</span><em>Comprar apartamento en Santo Domingo</em></a>
+        <a href="#servicios"><small>06</small><span>Mis empresas</span><em>Compra · Administra · Diseña</em></a>
+        <a href="#contacto"><small>07</small><span>Contacto</span><em>Cuéntame qué necesitas</em></a>
       </nav>
-      <a class="btn btn-amber magnetic" href="https://wa.me/18294554783?text=Hola%20Howard%2C%20quiero%20asesor%C3%ADa%20inmobiliaria%20para%20comprar%20o%20invertir%20en%20RD." target="_blank" rel="noopener noreferrer" data-track="whatsapp">
-        WhatsApp Directo
-      </a>
-    </header>
+      <aside class="hm-side">
+        <p class="hm-hello">Howard Luna<small>Santo Domingo · República Dominicana</small></p>
+        <div class="hm-biz">
+          <a href="https://alveare.do/" target="_blank" rel="noopener noreferrer" style="--c:#fd8505" data-track="menu_alveare"><b>Alveare Realty</b><span>Bienes raíces ↗</span></a>
+          <a href="https://wiseservicesrd.com/" target="_blank" rel="noopener noreferrer" style="--c:#2dd4bf" data-track="menu_wise"><b>Wise Services RD</b><span>Administración ↗</span></a>
+          <a href="https://isapromord.github.io/isapromord.com/" target="_blank" rel="noopener noreferrer" style="--c:#8b9bff" data-track="menu_isapromord"><b>ISAPromoRD</b><span>Diseño web ↗</span></a>
+        </div>
+        <a class="hm-wa" href="https://wa.me/18294554783?text=Hola%20Howard%2C%20quiero%20asesor%C3%ADa." target="_blank" rel="noopener noreferrer" data-track="whatsapp">Escríbeme por WhatsApp</a>
+        <p class="hm-contact"><a href="tel:+18294554783">+1 (829) 455-4783</a><a href="mailto:howard@alveare.do">howard@alveare.do</a></p>
+      </aside>
+    </div>
   </div>
 
   <main id="inicio"><span id="contenido" tabindex="-1"></span>
@@ -781,7 +785,7 @@
       <div class="o-ring" id="oRing" role="group" aria-label="Mis empresas. Arrastra o usa las flechas para girar.">
         <button class="o-card" type="button" data-color="#fd8505" style="--c:#fd8505" aria-label="Alveare Realty, bienes raíces. Ver detalles">
           <span class="o-ctop"><span class="o-lg"><img src="assets/images/alveare-logo.webp" alt="" width="26" height="26" /></span>Bienes raíces</span>
-          <span class="o-scene s-alv"><span class="m-photo"><img src="assets/images/apex-esperilla.webp" alt="" loading="lazy" /><span class="m-loc">La Esperilla, Santo Domingo</span></span><span class="m-chip ok m-c1">Proyecto verificado</span><span class="m-chip m-c2">Ley CONFOTUR</span></span>
+          <span class="o-scene s-alv"><span class="m-photo"><img src="assets/images/apex-esperilla.webp" alt="" loading="lazy" /><span class="m-loc">Santo Domingo</span></span><span class="m-chip ok m-c1">Proyecto verificado</span><span class="m-chip m-c2">Ley CONFOTUR</span></span>
           <span class="o-shine"></span>
           <span class="o-cbody"><strong>Alveare Realty</strong><span><span>Compra e inversión segura</span><b>Ver más →</b></span></span>
         </button>
@@ -1551,6 +1555,7 @@
     });
   </script>
   <script defer src="assets/orbit.js"></script>
+  <script defer src="assets/menu.js"></script>
   <script defer src="assets/analytics.js"></script>
 </body>
 </html>
