@@ -519,15 +519,15 @@
     .portfolio-section.hs-on .hs-viewport { overflow: visible; scroll-snap-type: none; }
     .bento-projects { display: flex; gap: 24px; width: max-content; }
     .project-card {
-      position: relative; border-radius: var(--radius-xl); overflow: hidden; flex: 0 0 auto;
-      height: clamp(400px, calc(100svh - 345px), 580px); aspect-ratio: 3 / 2;
+      position: relative; border-radius: 12px; overflow: hidden; flex: 0 0 auto;
+      height: clamp(400px, calc(100svh - 345px), 580px); aspect-ratio: var(--ar, 4 / 3);
       background: var(--navy-900); border: 1px solid var(--line-dark); scroll-snap-align: start;
       display: flex; flex-direction: column; justify-content: flex-end;
       transition: transform 0.45s var(--ease-apple), box-shadow 0.45s var(--ease-apple);
     }
     .project-card.is-hidden { display: none; }
     .project-card img {
-      position: absolute; top: 0; bottom: 0; left: -6%; width: 112%; height: 100%; object-fit: cover;
+      position: absolute; inset: 0; width: 100%; max-width: none; height: 100%; object-fit: cover;
     }
     .hs-progress { margin-top: 28px; height: 2px; border-radius: 2px; background: rgba(255, 255, 255, 0.12); overflow: hidden; }
     .project-card.hs-end { background: radial-gradient(120% 90% at 0% 100%, rgba(253, 133, 5, 0.28), transparent 60%), var(--navy-900); border-color: rgba(253, 133, 5, 0.35); aspect-ratio: 4 / 5; }
@@ -973,8 +973,8 @@
 
         <div class="hs-viewport" tabindex="0" aria-label="Proyectos, desliza para ver más">
         <div class="bento-projects">
-          <article class="project-card reveal-up" data-category="sd">
-            <img src="assets/images/apex-esperilla.webp" width="1400" height="1400" style="object-position:50% 8%" alt="Torre APEX La Esperilla en Santo Domingo" loading="lazy" decoding="async" />
+          <article class="project-card reveal-up" style="--ar:1400 / 1400" data-category="sd">
+            <img src="assets/images/apex-esperilla.webp" width="1400" height="1400" alt="Torre APEX La Esperilla en Santo Domingo" loading="lazy" decoding="async" />
             <div class="project-scrim"></div>
             <div class="project-content">
               <span class="project-tag">La Esperilla · Santo Domingo</span>
@@ -984,7 +984,7 @@
             </div>
           </article>
 
-          <article class="project-card reveal-up" data-category="sd">
+          <article class="project-card reveal-up" style="--ar:1400 / 1050" data-category="sd">
             <img src="assets/images/apex-rooftop.webp" width="1400" height="1050" alt="Rooftop y áreas sociales panorámicas en el Polígono Central" loading="lazy" decoding="async" />
             <div class="project-scrim"></div>
             <div class="project-content">
@@ -995,7 +995,7 @@
             </div>
           </article>
 
-          <article class="project-card reveal-up" data-category="inversion">
+          <article class="project-card reveal-up" style="--ar:1097 / 960" data-category="inversion">
             <img src="assets/images/torre-lista-atardecer.webp" width="1097" height="960" alt="Torre residencial terminada con piscina y terraza social al atardecer" loading="lazy" decoding="async" />
             <div class="project-scrim"></div>
             <div class="project-content">
@@ -1006,7 +1006,7 @@
             </div>
           </article>
 
-          <article class="project-card reveal-up" data-category="inversion">
+          <article class="project-card reveal-up" style="--ar:1400 / 1050" data-category="inversion">
             <img src="assets/images/apex-gym.webp" width="1400" height="1050" alt="Amenidades modernas y proyectos turísticos con Ley CONFOTUR en Punta Cana" loading="lazy" decoding="async" />
             <div class="project-scrim"></div>
             <div class="project-content">

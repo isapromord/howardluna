@@ -1,5 +1,5 @@
 /* Portafolio: la sección se ancla y las tarjetas se desplazan de lado mientras haces scroll.
-   Las fotos se mueven un poco al revés dentro de cada tarjeta (parallax). */
+   Cada tarjeta tiene la forma de su foto, así que no se recorta nada. */
 window.addEventListener('DOMContentLoaded', function () {
   var sec = document.getElementById('proyectos');
   if (!sec || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
@@ -13,13 +13,12 @@ window.addEventListener('DOMContentLoaded', function () {
     var tl = gsap.timeline({
       defaults: { ease: 'none' },
       scrollTrigger: {
-        trigger: sec, start: 'top top', end: function () { return '+=' + Math.max(1, travel() * 1.15); },
+        trigger: sec, start: 'top top', end: function () { return '+=' + Math.max(1, travel() * 1.5); },
         pin: true, scrub: 0.6, invalidateOnRefresh: true,
         onUpdate: function (self) { if (bar) bar.style.transform = 'scaleX(' + self.progress + ')'; }
       }
     });
-    tl.to(track, { x: function () { return -travel(); } }, 0)
-      .fromTo(track.querySelectorAll('img'), { xPercent: 4 }, { xPercent: -4 }, 0);
+    tl.to(track, { x: function () { return -travel(); } }, 0);
     ScrollTrigger.sort(); ScrollTrigger.refresh();
     return function () { sec.classList.remove('hs-on'); if (bar) bar.style.transform = ''; };
   });
